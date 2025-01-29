@@ -11,20 +11,42 @@ public class Peira {
             String line;
             Scanner in = new Scanner(System.in);
             line = in.nextLine();
-            if (line.contains("bye")) {
+            int taskIndex = 0;
+            if (line.startsWith("mark ")) {
+                taskIndex = Integer.parseInt(line.substring(5));
+                line = "mark";
+            }
+            if (line.startsWith("unmark ")) {
+                taskIndex = Integer.parseInt(line.substring(7));
+                line = "unmark";
+            }
+            switch (line) {
+            case "bye":
                 System.out.println("    ____________________________________________________________");
                 System.out.println("    Bye. Hope to see you again soon!");
                 System.out.println("    ____________________________________________________________");
-                break;
-            } else if (line.contains("list")){
+                return; // to exit the program entirely
+            case "list":
                 System.out.println("    ____________________________________________________________");
                 Task.printTasks();
                 System.out.println("    ____________________________________________________________");
-            } else {
+                break;
+            case "mark":
+                System.out.println("    ____________________________________________________________");
+                Task.markDone(taskIndex);
+                System.out.println("    ____________________________________________________________");
+                break;
+            case "unmark":
+                System.out.println("    ____________________________________________________________");
+                Task.markUndone(taskIndex);
+                System.out.println("    ____________________________________________________________");
+                break;
+            default:
                 System.out.println("    ____________________________________________________________");
                 System.out.println("    added: " + line);
                 Task.addTask(line);
                 System.out.println("    ____________________________________________________________");
+                break;
             }
         }
     }
