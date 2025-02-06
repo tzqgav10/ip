@@ -20,6 +20,28 @@ public class Peira {
                 taskIndex = Integer.parseInt(line.substring(7));
                 line = "unmark";
             }
+            if (line.startsWith("todo ")) {
+                line = line.substring(4);
+                Todo.addTask(new Todo(line));
+            }
+            if (line.startsWith("deadline ")) {
+                line = line.substring(8);
+
+                int byIndex = line.indexOf(" /by ");
+                String description = line.substring(0, byIndex);
+                String by = line.substring(byIndex + 5);
+                Deadline.addTask(new Deadline(description, by));
+            }
+            if (line.startsWith("event ")) {
+                line = line.substring(5);
+
+                int fromIndex = line.indexOf(" /from ");
+                String description = line.substring(0, fromIndex);
+                int toIndex = line.indexOf(" /to ");
+                String by = line.substring(fromIndex + 7, toIndex);
+                String to = line.substring(toIndex + 5);
+                Event.addTask(new Event(description, by, to));
+            }
             switch (line) {
             case "bye":
                 System.out.println("    ____________________________________________________________");
@@ -42,10 +64,7 @@ public class Peira {
                 System.out.println("    ____________________________________________________________");
                 break;
             default:
-                System.out.println("    ____________________________________________________________");
-                System.out.println("    added: " + line);
-                Task.addTask(line);
-                System.out.println("    ____________________________________________________________");
+                // System.out.println("    Instructions unclear. Please input a valid command!");
                 break;
             }
         }

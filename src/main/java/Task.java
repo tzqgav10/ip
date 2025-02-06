@@ -1,6 +1,6 @@
 public class Task {
-    private static int totalTasks = 0; // total number of tasks
-    private static Task[] entireList = new Task[100];
+    protected static int totalTasks = 0; // total number of tasks
+    protected static Task[] entireList = new Task[100];
     protected String description;
     protected boolean isDone;
 
@@ -23,10 +23,7 @@ public class Task {
         int index = 1;
         System.out.println("    Here are the tasks in your lists:");
         for (int i = 0; i < totalTasks; i++) {
-            System.out.print("    " + index + ".");
-            System.out.print("[" + entireList[i].getStatusIcon() + "] ");
-            System.out.println(entireList[i].description);
-            index++;
+            System.out.println("    " + (i + 1) + "." + entireList[i].toString());
         }
     }
     // get total number of tasks
@@ -46,7 +43,7 @@ public class Task {
     public static void markUndone(int index) {
         entireList[index-1].isDone = false;
         System.out.println("    OK, I've marked this task as undone:");
-        System.out.print("      " + "[" + entireList[index-1].getStatusIcon() + "] ");
+        System.out.print("      " + "[" + entireList[index-1].getStatusIcon() + "]");
         System.out.println(entireList[index-1].description);
     }
 }
