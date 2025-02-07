@@ -1,6 +1,7 @@
 public class Task {
     protected static int totalTasks = 0; // total number of tasks
-    protected static Task[] entireList = new Task[100];
+    private static final int MAX_TASKS = 100;
+    protected static Task[] entireList = new Task[MAX_TASKS];
     protected String description;
     protected boolean isDone;
 
@@ -10,9 +11,14 @@ public class Task {
         this.isDone = false;
     }
     // add task method
-    public static void addTask(String taskDescription) {
-        entireList[totalTasks] = new Task(taskDescription);
+    public static void addTask(Task task) {
+        entireList[totalTasks] = task;
         totalTasks++;
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("      " + task);
+        System.out.println("    Now you have " + Task.totalTasks + " tasks in the list.");
+        System.out.println("    ____________________________________________________________");
     }
     // retrieve task's completion status method
     public String getStatusIcon() {
