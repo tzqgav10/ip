@@ -27,7 +27,7 @@ public class Task {
     // print tasks method
     public static void printTasks() {
         int index = 1;
-        System.out.println("    Here are the tasks in your lists:");
+        System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < totalTasks; i++) {
             System.out.println("    " + (i + 1) + "." + entireList[i].toString());
         }
