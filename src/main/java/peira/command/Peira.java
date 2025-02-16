@@ -1,3 +1,11 @@
+package peira.command;
+
+import peira.PeiraExceptions;
+import peira.task.Deadline;
+import peira.task.Event;
+import peira.task.Task;
+import peira.task.Todo;
+
 import java.util.Scanner;
 
 public class Peira {

@@ -1,3 +1,7 @@
+package peira.task;
+
+import peira.PeiraExceptions;
+
 public class Task {
     protected static int totalTasks = 0; // total number of tasks
     private static final int MAX_TASKS = 100;
@@ -42,7 +46,7 @@ public class Task {
     }
     // mark done method
     // can consider adding exceptions for edge cases later on
-    public static void markDone(int index) throws PeiraExceptions{
+    public static void markDone(int index) throws PeiraExceptions {
         if (index < 0 || index > totalTasks) {
             throw new PeiraExceptions("    Chosen index doesn't exist!");
         }
