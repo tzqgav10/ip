@@ -111,8 +111,7 @@ public class Task {
         }
         entireList.get(index-1).isDone = true;
         System.out.println("    Nice! I've marked this task as done:");
-        System.out.print("     " + "[" + entireList.get(index-1).getStatusIcon() + "]");
-        System.out.println(entireList.get(index-1).description);
+        System.out.println("     " + entireList.get(index-1).toString());
         saveTasksToFile();
     }
     // mark undone method
@@ -123,8 +122,7 @@ public class Task {
         }
         entireList.get(index-1).isDone = false;
         System.out.println("    OK, I've marked this task as undone:");
-        System.out.print("     " + "[" + entireList.get(index-1).getStatusIcon() + "]");
-        System.out.println(entireList.get(index-1).description);
+        System.out.println("     " + entireList.get(index-1).toString());
         saveTasksToFile();
     }
     // remove task from list method
@@ -136,5 +134,6 @@ public class Task {
         System.out.println("     " + entireList.get(index-1).toString());
         entireList.remove(index-1);
         System.out.println("    Now you have " + entireList.size() + " tasks in the list.");
+        saveTasksToFile();
     }
 }
