@@ -12,6 +12,8 @@ public class Peira {
     public static void main(String[] args) {
         handleGreeting();
 
+        Task.loadTasksFromFile();
+
         Scanner in = new Scanner(System.in);
 
         while (true) {
