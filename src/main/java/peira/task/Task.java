@@ -1,11 +1,10 @@
 package peira.task;
 
+import java.util.ArrayList;
 import peira.PeiraExceptions;
 
 public class Task {
-    protected static int totalTasks = 0; // total number of tasks
-    private static final int MAX_TASKS = 100;
-    protected static Task[] entireList = new Task[MAX_TASKS];
+    protected static ArrayList<Task> entireList = new ArrayList<>();
     protected String description;
     protected boolean isDone;
 
@@ -16,12 +15,11 @@ public class Task {
     }
     // add task method
     public static void addTask(Task task) {
-        entireList[totalTasks] = task;
-        totalTasks++;
+        entireList.add(task); // integrates collection to add task
         System.out.println("    ____________________________________________________________");
         System.out.println("    Got it. I've added this task:");
         System.out.println("      " + task);
-        System.out.println("    Now you have " + Task.totalTasks + " tasks in the list.");
+        System.out.println("    Now you have " + Task.entireList.size() + " tasks in the list.");
         System.out.println("    ____________________________________________________________");
     }
     // retrieve task's completion status method
@@ -31,39 +29,44 @@ public class Task {
     // print tasks method
     public static void printTasks() {
         int index = 1;
-        if (totalTasks == 0) {
+        if (entireList.isEmpty()) {
             System.out.println("    There are no tasks in your list!");
             return;
         }
         System.out.println("    Here are the tasks in your list:");
-        for (int i = 0; i < totalTasks; i++) {
-            System.out.println("    " + (i + 1) + "." + entireList[i].toString());
+        for (int i = 0; i < entireList.size(); i++) {
+            System.out.println("    " + (i + 1) + "." + entireList.get(i).toString());
         }
-    }
-    // get total number of tasks
-    public int getTotalTasks() {
-        return totalTasks;
     }
     // mark done method
     // can consider adding exceptions for edge cases later on
     public static void markDone(int index) throws PeiraExceptions {
-        if (index < 0 || index > totalTasks) {
+        if (index < 0 || index > entireList.size()) {
             throw new PeiraExceptions("    Chosen index doesn't exist!");
         }
-        entireList[index-1].isDone = true;
+        entireList.get(index-1).isDone = true;
         System.out.println("    Nice! I've marked this task as done:");
-        System.out.print("     " + "[" + entireList[index-1].getStatusIcon() + "]");
-        System.out.println(entireList[index-1].description);
+        System.out.println("     " + entireList.get(index-1).toString());
     }
     // mark undone method
     // can consider adding exceptions for edge cases later on
     public static void markUndone(int index) throws PeiraExceptions {
-        if (index < 0 || index > totalTasks) {
+        if (index < 0 || index > entireList.size()) {
             throw new PeiraExceptions("    Chosen index doesn't exist!");
         }
-        entireList[index-1].isDone = false;
+        entireList.get(index-1).isDone = false;
         System.out.println("    OK, I've marked this task as undone:");
-        System.out.print("     " + "[" + entireList[index-1].getStatusIcon() + "]");
-        System.out.println(entireList[index-1].description);
+        System.out.println("     " + entireList.get(index-1).toString());
+    }
+
+    // remove task from list method
+    public static void removeTask(int index) throws PeiraExceptions {
+        if (index < 0 || index > entireList.size()) {
+            throw new PeiraExceptions("    Chosen index doesn't exist!");
+        }
+        System.out.println("    Okay, I have managed to delete this task:");
+        System.out.println("     " + entireList.get(index-1).toString());
+        entireList.remove(index-1);
+        System.out.println("    Now you have " + entireList.size() + " tasks in the list.");
     }
 }

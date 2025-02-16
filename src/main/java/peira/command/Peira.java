@@ -36,6 +36,9 @@ public class Peira {
                     return;
                 } else if (line.startsWith("list")) {
                     handleList();
+                } else if (line.startsWith("delete ")) {
+                    taskIndex = Integer.parseInt(line.substring(7));
+                    handleDelete(taskIndex);
                 } else {
                     // handle exception where command is not understood
                     throw new PeiraExceptions("    Can you enter a valid command please?");
@@ -157,6 +160,16 @@ public class Peira {
     private static void handleList() {
         printLine();
         Task.printTasks();
+        printLine();
+    }
+
+    private static void handleDelete(int index) {
+        printLine();
+        try {
+            Task.removeTask(index);
+        } catch (PeiraExceptions e) {
+            System.out.println(e.getMessage());
+        }
         printLine();
     }
 }
