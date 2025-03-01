@@ -1,11 +1,9 @@
 package peira.task;
 
 public class Todo extends Task {
-    protected boolean isDone;
 
     public Todo(String description) {
         super(description);
-        isDone = false;
     }
     // method to initialize description for task to do
     public static Todo fromFileString(String fileString) {
@@ -18,6 +16,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + "[" + super.getStatusIcon() + "]" + description;
+        return "[T]" + "[" + super.getStatusIcon() + "] " + description;
     }
 }
