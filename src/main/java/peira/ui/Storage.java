@@ -13,12 +13,25 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Handles reading and saving tasks to the file that stores tasks.
+ * This class is responsible for saving tasks to the file and loading tasks from the file
+ * at the start of the application.
+ *
+ * @author Gavin
+ * @version 1.0
+ */
 public class Storage {
     private static final String FILE_NAME = "tasks.txt";
     private static final Path FILE_PATH = Paths.get(System.getProperty("user.home"),
             "Peira", "data", FILE_NAME);
 
-    // save tasks to data file for storage when making any changes to the list of tasks
+    /**
+     * Saves the list of tasks to the file.
+     * If the file or directory does not exist, it will be created.
+     *
+     * @param entireList The list of tasks to be saved.
+     */
     public static void saveTasksToFile(ArrayList<Task> entireList) {
         try {
             // ensure the data directory exists
@@ -36,7 +49,14 @@ public class Storage {
             System.out.println("    Error saving tasks to file: " + e.getMessage());
         }
     }
-    // determine which task to add
+    /**
+     * Determines the type of task from a string representation and creates the
+     * corresponding task object.
+     *
+     * @param fileString The string representation of the task from the file.
+     * @return The task object corresponding to the string representation, or
+     * {@code null} if the string is invalid.
+     */
     public static Task fromFileString(String fileString) {
         if (fileString.startsWith("[T]")) {
             return Todo.fromFileString(fileString);
@@ -48,8 +68,13 @@ public class Storage {
             return null;
         }
     }
-    // check if there is any data files previously created
-    // if there is a data file, scan the file to add subsequent tasks to the list
+
+    /**
+     * Loads tasks from the file into a list.
+     * If the file does not exist, an empty list is returned.
+     *
+     * @return A list of tasks loaded from the file.
+     */
     public ArrayList<Task> loadTasksFromFile() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
