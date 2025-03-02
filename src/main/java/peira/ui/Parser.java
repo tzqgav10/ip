@@ -32,6 +32,8 @@ public class Parser {
             return new UnmarkCommand(Integer.parseInt(fullCommand.substring(7)));
         } else if (fullCommand.startsWith("delete ")) {
             return new DeleteCommand(Integer.parseInt(fullCommand.substring(7)));
+        } else if (fullCommand.startsWith("find ")) {
+            return new FindCommand(fullCommand.substring(5));
         } else if (fullCommand.equals("list")) {
             return new ListCommand();
         } else if (fullCommand.equals("bye")) {
