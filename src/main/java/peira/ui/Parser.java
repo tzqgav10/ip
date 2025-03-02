@@ -3,7 +3,22 @@ package peira.ui;
 import peira.command.*;
 import peira.PeiraExceptions;
 
+/**
+ * Parses user input into executable commands.
+ * This class is responsible for interpreting user commands and creating the respective
+ * command objects.
+ *
+ * @author Gavin
+ * @version 1.0
+ */
 public class Parser {
+    /**
+     * Parses the full user command and returns the corresponding {@link Command} object.
+     *
+     * @param fullCommand The full command entered by the user.
+     * @return The {@link Command} object corresponding to the user's input.
+     * @throws PeiraExceptions If the command is invalid or cannot be parsed.
+     */
     public static Command parse(String fullCommand) throws PeiraExceptions {
         if (fullCommand.startsWith("todo ")) {
             return new TodoCommand(fullCommand.substring(5));

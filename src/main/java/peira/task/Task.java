@@ -7,22 +7,49 @@ import java.util.stream.Collectors;
 import peira.PeiraExceptions;
 import peira.ui.Storage;
 
+/**
+ * Represents a task in the task lists.
+ * This class serves as the base class for different types of tasks (e.g. deadline, event).
+ *
+ * @author Gavin
+ * @version 1.0
+ */
 public class Task {
+
+    /** Description of the task. */
     protected String description;
+
+    /** Status of the task if it is completed. */
     protected boolean isDone;
+
+    /** List containing all the tasks. */
     protected static ArrayList<Task> entireList = new ArrayList<>();
 
-    // getter for entireList
+    /**
+     * Retrieve the list of tasks.
+     *
+     * @return The list of tasks.
+     */
     public static ArrayList<Task> getEntireList() {
         return entireList;
     }
 
-    // constructor for list
+    /**
+     * Creates a new {@code Task} with a specified description.
+     * The task is initially marked as not done.
+     *
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-    // add task method
+
+    /**
+     * Adds a task to the task list and saves the updated list to storage.
+     *
+     * @param task The task to be added.
+     */
     public static void addTask(Task task) {
         entireList.add(task); // integrates collection to add task
         System.out.println("    Got it. I've added this task:");
@@ -31,11 +58,20 @@ public class Task {
         Storage.saveTasksToFile(entireList);
     }
 
-    // retrieve task's completion status method
+    /**
+     * Returns the status icon of the task.
+     * A done task is marked with "X", and an undone task is marked with a space.
+     *
+     * @return The status icon of the task.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
-    // print tasks method
+
+    /**
+     * Prints all tasks in the task list.
+     * If the list is empty, a message indicating no tasks is displayed.
+     */
     public static void printTasks() {
         if (entireList.isEmpty()) {
             System.out.println("    There are no tasks in your list!");
@@ -64,8 +100,12 @@ public class Task {
             System.out.println("    " + (i + 1) + "." + filteredList.get(i).toString());
         }
     }
-    // mark done method
-    // can consider adding exceptions for edge cases later on
+    /**
+     * Marks a task as done based on its index in the task list.
+     *
+     * @param index The index of the task to be marked as done.
+     * @throws PeiraExceptions If the index is invalid.
+     */
     public static void markDone(int index) throws PeiraExceptions {
         if (index < 0 || index > entireList.size()) {
             throw new PeiraExceptions("    Chosen index doesn't exist!");
@@ -75,8 +115,13 @@ public class Task {
         System.out.println("     " + entireList.get(index-1).toString());
         Storage.saveTasksToFile(entireList);
     }
-    // mark undone method
-    // can consider adding exceptions for edge cases later on
+
+    /**
+     * Marks a task as undone based on its index in the task list.
+     *
+     * @param index The index of the task to be marked as done.
+     * @throws PeiraExceptions If the index is invalid.
+     */
     public static void markUndone(int index) throws PeiraExceptions {
         if (index < 0 || index > entireList.size()) {
             throw new PeiraExceptions("    Chosen index doesn't exist!");
@@ -86,7 +131,13 @@ public class Task {
         System.out.println("     " + entireList.get(index-1).toString());
         Storage.saveTasksToFile(entireList);
     }
-    // remove task from list method
+
+    /**
+     * Removes a task from the task list based on its index.
+     *
+     * @param index The index of the task to be removed.
+     * @throws PeiraExceptions If the index is invalid.
+     */
     public static void removeTask(int index) throws PeiraExceptions {
         if (index < 0 || index > entireList.size()) {
             throw new PeiraExceptions("    Chosen index doesn't exist!");
