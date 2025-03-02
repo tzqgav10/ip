@@ -1,9 +1,12 @@
 package peira.command;
 
+import peira.PeiraExceptions;
+import peira.task.DateTime;
 import peira.task.Deadline;
 import peira.task.Event;
 import peira.ui.Storage;
 import peira.ui.Ui;
+import java.time.LocalDateTime;
 
 /**
  * Represents a command to add an event to the task list.
@@ -12,6 +15,7 @@ import peira.ui.Ui;
  * @author Gavin
  * @version 1.0
  */
+
 public class EventCommand extends Command {
     private String event;
     private String from;
@@ -39,6 +43,15 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) {
-        Event.addTask(new Event(event, from, to));
+        try {
+            LocalDateTime fromDateTime = DateTime.parseDateTime(from, "yyyy-M-d HHmm");
+            String formattedFrom = DateTime.formatDateTime(fromDateTime);
+            LocalDateTime toDateTime = DateTime.parseDateTime(to, "yyyy-M-d HHmm");
+            String formattedTo = DateTime.formatDateTime(toDateTime);
+            Event.addTask(new Event(event, formattedFrom, formattedTo));
+        } catch (PeiraExceptions e) {
+            System.out.println(e.getMessage());
+            Event.addTask(new Event(event, from, to));
+        }
     }
 }

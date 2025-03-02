@@ -28,7 +28,7 @@ public class Todo extends Task {
      */
     public static Todo fromFileString(String fileString) {
         boolean isDone = fileString.charAt(4) == 'X';
-        String description = fileString.substring(6);
+        String description = fileString.substring(7);
         Todo todo = new Todo(description);
         todo.isDone = isDone;
         return todo;

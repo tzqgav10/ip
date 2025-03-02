@@ -1,8 +1,11 @@
 package peira.command;
 
+import peira.PeiraExceptions;
+import peira.task.DateTime;
 import peira.task.Deadline;
 import peira.ui.Storage;
 import peira.ui.Ui;
+import java.time.LocalDateTime;
 
 /**
  * Represents a command to add a deadline task to the task list.
@@ -11,6 +14,7 @@ import peira.ui.Ui;
  * @author Gavin
  * @version 1.0
  */
+
 public class DeadlineCommand extends Command {
     private String description;
     private String by;
@@ -35,6 +39,13 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) {
-        Deadline.addTask(new Deadline(description, by));
+        try {
+            LocalDateTime dateTime = DateTime.parseDateTime(by, "yyyy-M-d HHmm");
+            String formattedDateTime = DateTime.formatDateTime(dateTime);
+            Deadline.addTask(new Deadline(description, formattedDateTime));
+        } catch (PeiraExceptions e) {
+            System.out.println(e.getMessage());
+            Deadline.addTask(new Deadline(description, by));
+        }
     }
 }
