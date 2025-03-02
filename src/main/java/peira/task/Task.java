@@ -1,6 +1,9 @@
 package peira.task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import peira.PeiraExceptions;
 import peira.ui.Storage;
 
@@ -41,6 +44,24 @@ public class Task {
         System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < entireList.size(); i++) {
             System.out.println("    " + (i + 1) + "." + entireList.get(i).toString());
+        }
+    }
+
+    public static void printTasksWithKeyword(String keyword) {
+        if (entireList.isEmpty()) {
+            System.out.println("    There are no tasks in your list!");
+            return;
+        }
+        ArrayList<Task> filteredList = entireList.stream().filter(task -> task.description !=
+                        null && task.description.toLowerCase().contains(keyword.toLowerCase()))
+                                .collect(Collectors.toCollection(ArrayList::new));
+        if (filteredList.isEmpty()) {
+            System.out.println("    There are no matching tasks in your list!");
+            return;
+        }
+        System.out.println("    Here are the matching tasks in your list:");
+        for (int i = 0; i < filteredList.size(); i++) {
+            System.out.println("    " + (i + 1) + "." + filteredList.get(i).toString());
         }
     }
     // mark done method
