@@ -14,7 +14,7 @@ public class Event extends Task {
     public static Event fromFileString(String fileString) {
         boolean isDone = fileString.charAt(4) == 'X';
         int indexOfDescription = fileString.indexOf(" (");
-        String description = fileString.substring(6, indexOfDescription);
+        String description = fileString.substring(7, indexOfDescription);
         int indexOfFrom = fileString.indexOf("from: ");
         int endIndexOfFrom = fileString.indexOf(",");
         String from = fileString.substring(indexOfFrom + 6, endIndexOfFrom);
