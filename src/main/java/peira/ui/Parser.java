@@ -23,26 +23,30 @@ public class Parser {
      * @throws PeiraExceptions If the command is invalid or cannot be parsed.
      */
     public static Command parse(String fullCommand) throws PeiraExceptions {
-        if (fullCommand.startsWith("todo ")) {
-            return new TodoCommand(fullCommand.substring(5));
-        } else if (fullCommand.startsWith("deadline ")) {
-            return parseDeadline(fullCommand.substring(9));
-        } else if (fullCommand.startsWith("event ")) {
-            return parseEvent(fullCommand.substring(6));
-        } else if (fullCommand.startsWith("mark ")) {
-            return new MarkCommand(Integer.parseInt(fullCommand.substring(5)));
-        } else if (fullCommand.startsWith("unmark ")) {
-            return new UnmarkCommand(Integer.parseInt(fullCommand.substring(7)));
-        } else if (fullCommand.startsWith("delete ")) {
-            return new DeleteCommand(Integer.parseInt(fullCommand.substring(7)));
-        } else if (fullCommand.startsWith("find ")) {
-            return new FindCommand(fullCommand.substring(5));
-        } else if (fullCommand.equals("list")) {
-            return new ListCommand();
-        } else if (fullCommand.equals("bye")) {
-            return new ExitCommand();
-        } else {
-            throw new PeiraExceptions(INDENT + "Can you enter a valid command please?");
+        try{
+            if (fullCommand.startsWith("todo ")) {
+                return new TodoCommand(fullCommand.substring(5));
+            } else if (fullCommand.startsWith("deadline ")) {
+                return parseDeadline(fullCommand.substring(9));
+            } else if (fullCommand.startsWith("event ")) {
+                return parseEvent(fullCommand.substring(6));
+            } else if (fullCommand.startsWith("mark ")) {
+                return new MarkCommand(Integer.parseInt(fullCommand.substring(5)));
+            } else if (fullCommand.startsWith("unmark ")) {
+                return new UnmarkCommand(Integer.parseInt(fullCommand.substring(7)));
+            } else if (fullCommand.startsWith("delete ")) {
+                return new DeleteCommand(Integer.parseInt(fullCommand.substring(7)));
+            } else if (fullCommand.startsWith("find ")) {
+                return new FindCommand(fullCommand.substring(5));
+            } else if (fullCommand.equals("list")) {
+                return new ListCommand();
+            } else if (fullCommand.equals("bye")) {
+                return new ExitCommand();
+            } else {
+                throw new PeiraExceptions(INDENT + "Can you enter a valid command please?");
+            }
+        } catch (NumberFormatException e) {
+            throw new PeiraExceptions(INDENT + "Invalid number format. Please provide a valid number.");
         }
     }
 
