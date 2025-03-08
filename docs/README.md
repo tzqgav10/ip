@@ -1,5 +1,4 @@
 # Peira User Guide
-___
 Peira is a CLI, Personal Assistant Chatbot that helps you to keep track of various things.
 Note that the commands are sensitive to spacing, so please follow the format closely.
 
@@ -11,8 +10,6 @@ Here is what happens when you start Peira:
     ____________________________________________________________
 ```
 ## Save File
-
----
 At the beginning of the program, if no data file is detected, Peira
 will automatically create one on your hard disk.
 <br/>
@@ -27,8 +24,6 @@ Otherwise, the list will be saved and updated every time a command that
 modifies it is entered (`todo`, `mark`, `unmark`, `delete`). 
 
 ## Adding Todo: `todo`
-
----
 Adds a todo task to the task list.
 
 Format: `todo [description]`
@@ -44,8 +39,6 @@ Example: `todo Sleep`
 ```
 
 ## Adding Deadlines: `deadline`
-
----
 Adds a deadline with a description and a due date/time to the task list.
 This command is able to parse the deadline if it is given in the format
 of `yyyy-M-d HHmm`. Otherwise, it will take the original deadline.
@@ -71,8 +64,6 @@ Example: `deadline Homework /by 2025-3-8 1800`
 ```
 
 ## Adding Event: `event`
-
----
 Adds an event with a description, start and end time/dates to the
 task list. Similar to `deadline`, `event` can parse date/time.
 
@@ -90,8 +81,6 @@ Example: `event Dinner /from 2pm /to 4pm`
 ```
 
 ## Listing Tasks: `list`
-
----
 Displays the list of tasks in your task list.
 
 Format: `list`
@@ -107,8 +96,6 @@ Example:
 ```
 
 ## Finding Tasks: `find`
-
----
 Finds tasks whose description are associated with the desired keyword.
 
 Format: `find [keyword]`
@@ -168,7 +155,7 @@ Example: `delete 2`
 ```
 
 ## Exiting the Chat: `bye`
-Ends the chat with Peira
+Ends the chat with Peira.
 
 Format: `bye`
 
