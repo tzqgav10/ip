@@ -25,6 +25,8 @@ public class Storage {
     private static final String FILE_NAME = "tasks.txt";
     private static final Path FILE_PATH = Paths.get(System.getProperty("user.home"),
             "Peira", "data", FILE_NAME);
+    private static final String INDENT = "    ";
+    private static final String LINE = "____________________________________________________________";
 
     /**
      * Saves the list of tasks to the file.
@@ -46,7 +48,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("    Error saving tasks to file: " + e.getMessage());
+            System.out.println(INDENT + "Error saving tasks to file: " + e.getMessage());
         }
     }
     /**
@@ -79,10 +81,9 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             if (!Files.exists(FILE_PATH)) {
-                System.out.println("    No existing tasks file found.");
-                System.out.println("    Starting with an empty task list.");
-                System.out.println("    ______________________________________" +
-                        "______________________");
+                System.out.println(INDENT + "No existing tasks file found.");
+                System.out.println(INDENT + "Starting with an empty task list.");
+                System.out.println(INDENT + LINE);
                 return tasks;
             }
             Scanner scanner = new Scanner(FILE_PATH.toFile());
@@ -96,7 +97,7 @@ public class Storage {
             }
             scanner.close();
         } catch (IOException e) {
-            System.out.println("    Error loading tasks from file: " + e.getMessage());
+            System.out.println(INDENT + "Error loading tasks from file: " + e.getMessage());
         }
         return tasks;
     }

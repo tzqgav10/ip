@@ -10,12 +10,14 @@ import java.util.Locale;
 
 public class DateTime {
 
+    private final static String INDENT = "    ";
+
     public static LocalDateTime parseDateTime (String date, String format) throws PeiraExceptions {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
         try {
             return LocalDateTime.parse(date, formatter);
         } catch (DateTimeParseException e) {
-            throw new PeiraExceptions("    Unable to parse date and time, using original input!");
+            throw new PeiraExceptions(INDENT + "Unable to parse date and time, using original input!");
         }
     }
 

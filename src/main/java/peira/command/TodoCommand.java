@@ -15,6 +15,7 @@ import peira.PeiraExceptions;
  */
 public class TodoCommand extends Command {
     private String description;
+    private final static String INDENT = "    ";
 
     /**
      * Creates a new instance of {@code TodoCommand} with a specified description.
@@ -36,7 +37,7 @@ public class TodoCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws PeiraExceptions {
         if (description.trim().isEmpty()) {
-            throw new PeiraExceptions("    How can I add something that is empty??");
+            throw new PeiraExceptions(INDENT + "How can I add something that is empty??");
         }
         Task.addTask(new Todo(description));
     }

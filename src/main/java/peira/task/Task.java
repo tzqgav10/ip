@@ -16,6 +16,9 @@ import peira.ui.Storage;
  */
 public class Task {
 
+    private static final String INDENT = "    ";
+    private static final String LONGERINDENT = "      ";
+
     /** Description of the task. */
     protected String description;
 
@@ -52,9 +55,9 @@ public class Task {
      */
     public static void addTask(Task task) {
         entireList.add(task); // integrates collection to add task
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + task);
-        System.out.println("    Now you have " + Task.entireList.size() + " tasks in the list.");
+        System.out.println(INDENT + "Got it. I've added this task:");
+        System.out.println(LONGERINDENT + task);
+        System.out.println(INDENT + "Now you have " + Task.entireList.size() + " tasks in the list.");
         Storage.saveTasksToFile(entireList);
     }
 
@@ -74,30 +77,30 @@ public class Task {
      */
     public static void printTasks() {
         if (entireList.isEmpty()) {
-            System.out.println("    There are no tasks in your list!");
+            System.out.println(INDENT + "There are no tasks in your list!");
             return;
         }
-        System.out.println("    Here are the tasks in your list:");
+        System.out.println(INDENT + "Here are the tasks in your list:");
         for (int i = 0; i < entireList.size(); i++) {
-            System.out.println("    " + (i + 1) + "." + entireList.get(i).toString());
+            System.out.println(INDENT + (i + 1) + "." + entireList.get(i).toString());
         }
     }
 
     public static void printTasksWithKeyword(String keyword) {
         if (entireList.isEmpty()) {
-            System.out.println("    There are no tasks in your list!");
+            System.out.println(INDENT + "There are no tasks in your list!");
             return;
         }
         ArrayList<Task> filteredList = entireList.stream().filter(task -> task.description !=
                         null && task.description.toLowerCase().contains(keyword.toLowerCase()))
                                 .collect(Collectors.toCollection(ArrayList::new));
         if (filteredList.isEmpty()) {
-            System.out.println("    There are no matching tasks in your list!");
+            System.out.println(INDENT + "There are no matching tasks in your list!");
             return;
         }
-        System.out.println("    Here are the matching tasks in your list:");
+        System.out.println(INDENT + "Here are the matching tasks in your list:");
         for (int i = 0; i < filteredList.size(); i++) {
-            System.out.println("    " + (i + 1) + "." + filteredList.get(i).toString());
+            System.out.println(INDENT + (i + 1) + "." + filteredList.get(i).toString());
         }
     }
     /**
@@ -108,11 +111,11 @@ public class Task {
      */
     public static void markDone(int index) throws PeiraExceptions {
         if (index < 0 || index > entireList.size()) {
-            throw new PeiraExceptions("    Chosen index doesn't exist!");
+            throw new PeiraExceptions(INDENT + "Chosen index doesn't exist!");
         }
-        entireList.get(index-1).isDone = true;
-        System.out.println("    Nice! I've marked this task as done:");
-        System.out.println("     " + entireList.get(index-1).toString());
+        entireList.get(index - 1).isDone = true;
+        System.out.println(INDENT + "Nice! I've marked this task as done:");
+        System.out.println(LONGERINDENT + entireList.get(index - 1).toString());
         Storage.saveTasksToFile(entireList);
     }
 
@@ -124,11 +127,11 @@ public class Task {
      */
     public static void markUndone(int index) throws PeiraExceptions {
         if (index < 0 || index > entireList.size()) {
-            throw new PeiraExceptions("    Chosen index doesn't exist!");
+            throw new PeiraExceptions(INDENT + "Chosen index doesn't exist!");
         }
-        entireList.get(index-1).isDone = false;
-        System.out.println("    OK, I've marked this task as undone:");
-        System.out.println("     " + entireList.get(index-1).toString());
+        entireList.get(index - 1).isDone = false;
+        System.out.println(INDENT + "OK, I've marked this task as undone:");
+        System.out.println(LONGERINDENT + entireList.get(index - 1).toString());
         Storage.saveTasksToFile(entireList);
     }
 
@@ -140,12 +143,12 @@ public class Task {
      */
     public static void removeTask(int index) throws PeiraExceptions {
         if (index < 0 || index > entireList.size()) {
-            throw new PeiraExceptions("    Chosen index doesn't exist!");
+            throw new PeiraExceptions(INDENT + "Chosen index doesn't exist!");
         }
-        System.out.println("    Okay, I have managed to delete this task:");
-        System.out.println("     " + entireList.get(index-1).toString());
-        entireList.remove(index-1);
-        System.out.println("    Now you have " + entireList.size() + " tasks in the list.");
+        System.out.println(INDENT + "Okay, I have managed to delete this task:");
+        System.out.println(LONGERINDENT + entireList.get(index - 1).toString());
+        entireList.remove(index - 1);
+        System.out.println(INDENT + "Now you have " + entireList.size() + " tasks in the list.");
         Storage.saveTasksToFile(entireList);
     }
 }
